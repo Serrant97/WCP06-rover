@@ -56,6 +56,7 @@ int main(){
 		if(Ay < 0) {
 			while(Ay < 0) {
 				printf("\nDevice is flipped.\n");
+				digitalWrite(0,HIGH); // set wPi pin 0 (GPIO 11) high
 				Acc_y = read_raw_data(ACCEL_YOUT_H);
 				Ay = Acc_y/16384.0;
 				delay(1000);
@@ -63,6 +64,7 @@ int main(){
 		}
 		
 		printf("\nDevice is fine.\n");
+		digitalWrite(0,LOW); // set wPi pin 0 (GPIO 11) low
 		delay(1000);
 		
 	}
