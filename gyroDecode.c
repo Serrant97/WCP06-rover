@@ -10,7 +10,7 @@
 #define CONFIG       0x1A
 #define GYRO_CONFIG  0x1B
 #define INT_ENABLE   0x38
-#define ACCEL_YOUT_H 0x3D
+#define ACCEL_XOUT_H 0x3B
 
 int fd;
 
@@ -39,31 +39,31 @@ void ms_delay(int val){
 
 int main(){
 	
-	float Acc_y;
-	float Ay=0;
+	float Acc_x;
+	float Ax=0;
 	fd = wiringPiI2CSetup(Device_Address);   /*Initializes I2C with device Address*/
 	MPU6050_Init();		                 /* Initializes MPU6050 */
 	
 	while(1)
 	{
 		/* Read raw value of Accelerometer and gyroscope from MPU6050*/
-		Acc_y = read_raw_data(ACCEL_YOUT_H);
+		Acc_x = read_raw_data(ACCEL_XOUT_H);
 		
 		/* Divide raw value by sensitivity scale factor */
-		Ay = Acc_y/16384.0;
+		Ax = Acc_x/16384.0;
 		
 		// printf("\nAy = %.3f g\n",Ay);
-		if(Ay < 0) {
-			while(Ay < 0) {
-				printf("\nDevice is flipped.\n");
+		if(Ax < 0) {
+			while(Ax < 0) {
+				// printf("\nDevice is flipped.\n");
 				digitalWrite(0,HIGH); // set wPi pin 0 (GPIO 11) high
-				Acc_y = read_raw_data(ACCEL_YOUT_H);
-				Ay = Acc_y/16384.0;
+				Acc_x = read_raw_data(ACCEL_XOUT_H);
+				Ax = Acc_x/16384.0;
 				delay(1000);
 			}
 		}
 		
-		printf("\nDevice is fine.\n");
+		// printf("\nDevice is fine.\n");
 		digitalWrite(0,LOW); // set wPi pin 0 (GPIO 11) low
 		delay(1000);
 		
