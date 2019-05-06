@@ -26,61 +26,48 @@ export default class Dpad extends Component {
     render() {
       var connection = this.connection;
       return (
-        <View style={{ width: wp('50%'), height: hp('50%')}}>
-          <View style={{ flex: 1, justifyContent: 'space-evenly'}}>
+		<View style={{ position: 'absolute', right: 0, height: hp('50%') }}>
+          <View style={{ flex: 1 }}>
             <Button
-              onPress= {()=>console.log("hello!")}
+              onPress= {()=>connection.input([1,1,1])}
+			  title="Forward"
               //icon={<Ionicons name="md-checkmark-circle" size={32} color="green"/>}
-              color="#841584"
-              accessibilityLabel="Learn more about this purple button"
-              buttonStyle={{backgroundColor: 'rgba(0,0,0,1)'}}
+              color="#ffffff"
+              accessibilityLabel="Learn more about the forward button"
+              buttonStyle={{backgroundColor: 'rgba(0,0,0,0.35)'}}
               style={{width: wp('10%')}}
             />
           </View>
-          <View style={{ flex: 1, justifyContent: 'space-evenly', flexDirection:'row', alignItems: 'stretch'}}>
-            <Button
+          <View style={{ flex: 1, flexDirection:'row', justifyContent: 'space-evenly', alignItems: 'stretch'}}>
+			<Button
               onPress= {()=>connection.input([1,0,1])}
-              title="Turn left"
-              color="#095fff"
-              accessibilityLabel="Learn more about this purple button"
-              buttonStyle={{backgroundColor: 'rgba(0,0,0,0.5)'}}
+              title="Left"
+              color="#ffffff"
+              accessibilityLabel="Learn more about the left turn button"
+              buttonStyle={{backgroundColor: 'rgba(0,0,0,0.35)'}}
             />
-            <Button
+			<Button
+  		  	  onPress= {()=>connection.input([0,0,0])}
+  		  	  title="Stop"
+  		  	  color="#ffffff"
+  		  	  accessibilityLabel="Learn more about the stop button"
+  		  	  buttonStyle={{backgroundColor: 'rgba(0,0,0,0.35)'}}
+  		    />
+			<Button
               onPress= {()=>connection.input([1,1,0])}
-              title="Turn right"
-              color="#095fff"
-              accessibilityLabel="Learn more about this purple button"
-              buttonStyle={{backgroundColor: 'rgba(0,0,0,0.5)'}}
+              title="Right"
+              color="#ffffff"
+              accessibilityLabel="Learn more about the right turn button"
+              buttonStyle={{backgroundColor: 'rgba(0,0,0,0.35)'}}
             />
-            <Button
-              onPress= {()=>connection.input([0,0,0])}
-              title="Stop"
-              color="#095fff"
-              accessibilityLabel="Learn more about this purple button"
-              buttonStyle={{backgroundColor: 'rgba(0,0,0,0.5)'}}
-            />
-          </View>
-          <View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'space-evenly'}}>
+            </View>
+          <View style={{ flex: 1 }}>
             <Button
               onPress= {()=>connection.input([1,0,0])}
-              title="Backward"
-              color="#095fff"
-              accessibilityLabel="Learn more about this purple button"
-              buttonStyle={{backgroundColor: 'rgba(0,0,0,0.5)'}}
-            />
-            <Button
-              onPress= {()=>this.flipL()}
-              title="FLIP LEFT"
-              color="#095fff"
-              accessibilityLabel="Learn more about this purple button"
-              buttonStyle={{backgroundColor: 'rgba(0,0,0,0.5)'}}
-            />
-            <Button
-              onPress= {()=>this.flipR()}
-              title="FLIP RIGHT"
-              color="#095fff"
-              accessibilityLabel="Learn more about this purple button"
-              buttonStyle={{backgroundColor: 'rgba(0,0,0,0.5)'}}
+              title="Reverse"
+              color="#ffffff"
+              accessibilityLabel="Learn more about the reverse button"
+              buttonStyle={{backgroundColor: 'rgba(0,0,0,0.35)'}}
             />
           </View>
         </View>

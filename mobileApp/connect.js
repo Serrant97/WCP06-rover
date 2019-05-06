@@ -15,7 +15,7 @@ export default class Connect extends Component {
         ]);
 
         var alerted = (text) => {Alert.alert(
-          'You are '+ text + ' to the Server!',
+          'You have been '+ text + ' the Server!',
           'Alert',
           [
             {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
@@ -30,7 +30,7 @@ export default class Connect extends Component {
         //console.log("there is an error here:", this.socket)
         this.socket.on('connect', (socket,error) => {
           console.log("Connected to server");
-          alerted('connected');
+          alerted('connected to');
         });
         this.socket.on('connect_error', (error) => {
           console.log("ERROR HERE!!!!!",error)
@@ -38,7 +38,7 @@ export default class Connect extends Component {
 
         this.socket.on('disconnect', (reason) => {
           console.log(reason)
-          alerted('disconnected');
+          alerted('disconnected from');
         });
         this.lastMotors = [0,0,0];
     }

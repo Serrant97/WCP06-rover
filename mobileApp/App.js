@@ -34,7 +34,7 @@ class HomeScreen extends React.Component {
     return (
       <Overall>
       <WebView
-      source={{uri:'http://google.com'}}
+      source={{uri:'http://192.168.43.58:8080/stream'}}
       style={{ width: wp('100%'), height: hp('100%'), position: 'absolute'}}
       />
       <DPad/>
