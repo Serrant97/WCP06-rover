@@ -39,6 +39,9 @@ void ms_delay(int val){
 
 int main(){
 	
+	wiringPiSetup();
+	pinMode(0,OUTPUT);
+	
 	float Acc_x;
 	float Ax=0;
 	fd = wiringPiI2CSetup(Device_Address);   /*Initializes I2C with device Address*/
@@ -52,21 +55,27 @@ int main(){
 		/* Divide raw value by sensitivity scale factor */
 		Ax = Acc_x/16384.0;
 		
-		// printf("\nAy = %.3f g\n",Ay);
 		if(Ax < 0) {
-			while(Ax < 0) {
+			delay(500);
+			if(Ax < 0) {
 				// printf("\nDevice is flipped.\n");
 				digitalWrite(0,HIGH); // set wPi pin 0 (GPIO 11) high
+				while(Ax < 0) {
+					Acc_x = read_raw_data(ACCEL_XOUT_H);
+					Ax = Acc_x/16384.0;
+					delay(500);
+				}
+			}
+		} else {
+			delay(1000);
+			// printf("\nDevice is fine.\n");
+			digitalWrite(0,LOW); // set wPi pin 0 (GPIO 11) low
+			while(Ax >= 0) {
 				Acc_x = read_raw_data(ACCEL_XOUT_H);
 				Ax = Acc_x/16384.0;
-				delay(1000);
+				delay(500);
 			}
 		}
-		
-		// printf("\nDevice is fine.\n");
-		digitalWrite(0,LOW); // set wPi pin 0 (GPIO 11) low
-		delay(1000);
-		
 	}
 	return 0;
 }
